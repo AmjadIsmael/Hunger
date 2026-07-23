@@ -38,6 +38,7 @@ function Navbar({
 
   const navigate = (page) => {
     onNavigate(page)
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }
 
   return (
