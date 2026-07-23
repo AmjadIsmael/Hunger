@@ -1,0 +1,234 @@
+.menu-page {
+  min-height: 100svh;
+}
+
+.category-bar {
+  position: sticky;
+  top: 78px;
+  z-index: 10;
+  padding: 14px max(5vw, 24px);
+  border-block: 1px solid var(--line);
+  background: rgba(18, 17, 13, 0.9);
+  backdrop-filter: blur(18px);
+}
+
+.category-scroll {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.category-scroll button {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: var(--panel);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.category-scroll button:hover {
+  color: var(--cream);
+  border-color: rgba(255, 193, 7, 0.35);
+}
+
+.category-scroll button.active {
+  border-color: var(--gold);
+  color: #171205;
+  background: var(--gold);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2vw, 30px);
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 52px max(5vw, 24px) 100px;
+  scroll-margin-top: 135px;
+}
+
+.menu-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--panel);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.16);
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+
+.menu-card:hover {
+  border-color: rgba(255, 193, 7, 0.25);
+  transform: translateY(-5px);
+}
+
+.menu-card-image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0a0a08;
+}
+
+.menu-card-image::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 45%;
+  content: '';
+  background: linear-gradient(transparent, rgba(8, 8, 6, 0.58));
+}
+
+.menu-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% center;
+  transition: transform 400ms ease;
+}
+
+.menu-card:hover .menu-card-image img {
+  transform: scale(1.035);
+}
+
+.menu-card-body {
+  display: flex;
+  min-height: 245px;
+  padding: 22px;
+  flex-direction: column;
+}
+
+.item-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.item-heading h2 {
+  margin: 0;
+  color: var(--cream);
+  font-size: 1.15rem;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.item-heading strong {
+  flex: 0 0 auto;
+  color: var(--gold);
+  font-size: 1.15rem;
+}
+
+.item-heading small {
+  margin-right: 2px;
+  font-size: 0.7em;
+}
+
+.menu-card-body > p {
+  margin: 14px 0 24px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.menu-card-body > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 46px;
+  margin-top: auto;
+  border: 0;
+  border-radius: 12px;
+  color: #171205;
+  background: var(--gold);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 850;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.menu-card-body > button:hover {
+  background: #ffd03d;
+  transform: translateY(-1px);
+}
+
+.menu-card-body > button.added {
+  color: #171205;
+  background: linear-gradient(110deg, #ffc107 0%, #ffe47a 55%, #fff9e8 100%);
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.22);
+}
+
+.menu-card-body button svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+@media (min-width: 1450px) {
+  .menu-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .category-bar {
+    top: 68px;
+    padding: 10px 0;
+  }
+
+  .category-scroll {
+    justify-content: flex-start;
+    padding: 0 14px;
+  }
+
+  .category-scroll button {
+    padding: 9px 17px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 24px 14px 70px;
+    scroll-margin-top: 118px;
+  }
+
+  .menu-card {
+    border-radius: 17px;
+  }
+
+  .menu-card-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .menu-card-body {
+    min-height: 220px;
+    padding: 19px;
+  }
+
+  .item-heading h2,
+  .item-heading strong {
+    font-size: 1.05rem;
+  }
+}
