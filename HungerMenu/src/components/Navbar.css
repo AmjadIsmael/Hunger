@@ -9,7 +9,6 @@
   padding: 0 5vw;
   border-bottom: 1px solid var(--line);
   background: rgba(18, 17, 13, 0.88);
-  backdrop-filter: blur(18px);
 }
 
 .brand,
@@ -194,7 +193,6 @@
     border-radius: 22px;
     background: rgba(28, 26, 20, 0.94);
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(20px);
   }
 
   .mobile-nav button {

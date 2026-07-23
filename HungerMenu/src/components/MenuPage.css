@@ -9,7 +9,6 @@
   padding: 14px max(5vw, 24px);
   border-block: 1px solid var(--line);
   background: rgba(18, 17, 13, 0.9);
-  backdrop-filter: blur(18px);
 }
 
 .category-scroll {
