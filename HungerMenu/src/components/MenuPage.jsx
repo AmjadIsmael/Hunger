@@ -1,6 +1,5 @@
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import menuItems from '../data/menuItems'
-import { formatPrice } from '../utils/currency'
 import Footer from './Footer'
 import './MenuPage.css'
 
@@ -11,17 +10,13 @@ const copy = {
     intro: 'Big cravings deserve bold flavor. Find your new favorite.',
     categories: {
       all: 'All',
-      'chicken-sandwiches': 'Chicken Sandwiches',
-      'beef-sandwiches': 'Beef Sandwiches',
-      vegetarian: 'Vegetarian',
-      'chicken-burgers': 'Chicken Burgers',
-      'beef-burgers': 'Beef Burgers',
-      appetizers: 'Appetizers',
-      dips: 'Dips',
-      drinks: 'Drinks',
+      burgers: 'Burgers',
+      chicken: 'Crispy Chicken',
+      wraps: 'Wraps',
     },
     add: 'Add to Cart',
     added: 'Added!',
+    currency: '$',
   },
   ar: {
     eyebrow: 'نحضّرها طازجة عند الطلب',
@@ -29,31 +24,17 @@ const copy = {
     intro: 'الشهية الكبيرة تستحق نكهة غنية. اكتشف وجبتك المفضلة.',
     categories: {
       all: 'الكل',
-      'chicken-sandwiches': 'ساندويشات الدجاج',
-      'beef-sandwiches': 'ساندويشات اللحم',
-      vegetarian: 'نباتي',
-      'chicken-burgers': 'برغر الدجاج',
-      'beef-burgers': 'برغر اللحم',
-      appetizers: 'المقبلات',
-      dips: 'الصلصات',
-      drinks: 'المشروبات',
+      burgers: 'البرغر',
+      chicken: 'الدجاج المقرمش',
+      wraps: 'الراب',
     },
     add: 'أضف إلى السلة',
     added: 'تمت الإضافة!',
+    currency: '$',
   },
 }
 
-const categories = [
-  'all',
-  'chicken-sandwiches',
-  'beef-sandwiches',
-  'vegetarian',
-  'chicken-burgers',
-  'beef-burgers',
-  'appetizers',
-  'dips',
-  'drinks',
-]
+const categories = ['all', 'burgers', 'chicken', 'wraps']
 
 function CartIcon() {
   return (
@@ -68,7 +49,6 @@ function CartIcon() {
 function MenuPage({ language, onAddToCart }) {
   const [activeCategory, setActiveCategory] = useState('all')
   const [recentlyAdded, setRecentlyAdded] = useState(null)
-  const menuGridRef = useRef(null)
   const content = copy[language]
 
   const visibleItems = useMemo(
@@ -84,19 +64,14 @@ function MenuPage({ language, onAddToCart }) {
     window.setTimeout(() => setRecentlyAdded(null), 900)
   }
 
-  const changeCategory = (category) => {
-    setActiveCategory(category)
-    window.requestAnimationFrame(() => {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      menuGridRef.current?.scrollIntoView({
-        behavior: reduceMotion ? 'auto' : 'smooth',
-        block: 'start',
-      })
-    })
-  }
-
   return (
     <main className="menu-page">
+      <header className="menu-hero">
+        <p>{content.eyebrow}</p>
+        <h1>{content.title}</h1>
+        <span>{content.intro}</span>
+      </header>
+
       <nav className="category-bar" aria-label={content.title}>
         <div className="category-scroll">
           {categories.map((category) => (
@@ -104,7 +79,7 @@ function MenuPage({ language, onAddToCart }) {
               className={activeCategory === category ? 'active' : ''}
               key={category}
               type="button"
-              onClick={() => changeCategory(category)}
+              onClick={() => setActiveCategory(category)}
             >
               {content.categories[category]}
             </button>
@@ -112,16 +87,17 @@ function MenuPage({ language, onAddToCart }) {
         </div>
       </nav>
 
-      <section className="menu-grid" ref={menuGridRef}>
+      <section className="menu-grid">
         {visibleItems.map((item) => (
           <article className="menu-card" key={item.id}>
             <div className="menu-card-image">
               <img src={item.image} alt={item.name[language]} />
+              <span className="item-category">{content.categories[item.category]}</span>
             </div>
             <div className="menu-card-body">
               <div className="item-heading">
                 <h2>{item.name[language]}</h2>
-                <strong>{formatPrice(item.price)}</strong>
+                <strong><small>{content.currency}</small>{item.price.toFixed(2)}</strong>
               </div>
               <p>{item.description[language]}</p>
               <button
