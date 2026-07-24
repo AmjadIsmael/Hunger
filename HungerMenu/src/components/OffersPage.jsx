@@ -45,7 +45,7 @@ function OfferIcon() {
   )
 }
 
-function OffersPage({ language, onAddToCart }) {
+function OffersPage({ language, onAddToCart, onNavigate }) {
   const [recentlyAdded, setRecentlyAdded] = useState(null)
   const content = copy[language]
   const offers = menuItems.filter((item) => item.offer?.active)
@@ -97,7 +97,7 @@ function OffersPage({ language, onAddToCart }) {
         </section>
       )}
 
-      <Footer language={language} />
+      <Footer language={language} onNavigate={onNavigate} />
     </main>
   )
 }

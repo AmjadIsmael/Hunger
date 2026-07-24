@@ -7,7 +7,7 @@ const copy = {
     explore: 'Explore',
     links: ['Home', 'Menu', 'Offers', 'Our story'],
     visit: 'Visit',
-    address: 'Al Ain, Baalbeck – Qaa',
+    address: 'Al Ain, Baalbeck ',
     hours: 'Daily · 1:00 PM — 12:00 AM',
     contact: 'Contact',
     phone: '+961 71 230 797',
@@ -18,7 +18,7 @@ const copy = {
     explore: 'استكشف',
     links: ['الرئيسية', 'القائمة', 'العروض', 'قصتنا'],
     visit: 'زورونا',
-    address: 'العين، بعلبك – القاع',
+    address: 'العين، بعلبك ',
     hours: 'يومياً · 1:00 ظهراً — 12:00 ليلاً',
     contact: 'تواصل معنا',
     phone: '+961 71 230 797',
@@ -45,15 +45,33 @@ function SocialIcon({ name }) {
   )
 }
 
-function Footer({ language }) {
+function Footer({ language, onNavigate }) {
   const content = copy[language]
-  const linkTargets = ['#', '#', '#', '#story']
+  const linkTargets = [
+    { page: 'Home' },
+    { page: 'Menu' },
+    { page: 'Offers' },
+    { page: 'Home', section: 'story' },
+  ]
+
+  const navigate = (event, target) => {
+    event.preventDefault()
+    onNavigate(target.page)
+
+    window.setTimeout(() => {
+      if (target.section) {
+        document.getElementById(target.section)?.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      }
+    }, 0)
+  }
 
   return (
     <footer className="site-footer">
       <div className="footer-main">
         <div className="footer-brand">
-          <a href="#" className="footer-logo">
+          <a href="#home" className="footer-logo" onClick={(event) => navigate(event, { page: 'Home' })}>
             <img src={logo} alt="" />
             <strong>HUNGERS</strong>
           </a>
@@ -71,7 +89,13 @@ function Footer({ language }) {
         <div className="footer-column">
           <h3>{content.explore}</h3>
           {content.links.map((link, index) => (
-            <a href={linkTargets[index]} key={link}>{link}</a>
+            <a
+              href={linkTargets[index].section ? `#${linkTargets[index].section}` : `#${linkTargets[index].page.toLowerCase()}`}
+              key={link}
+              onClick={(event) => navigate(event, linkTargets[index])}
+            >
+              {link}
+            </a>
           ))}
         </div>
 

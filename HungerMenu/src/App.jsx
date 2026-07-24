@@ -53,20 +53,23 @@ function App() {
         />
 
         {activePage === 'Home' ? (
-          <HomePage language={language} />
+          <HomePage language={language} onNavigate={setActivePage} />
         ) : activePage === 'Menu' ? (
           <MenuPage
             language={language}
+            onNavigate={setActivePage}
             onAddToCart={(item) => setCartItems((items) => [...items, item])}
           />
         ) : activePage === 'Offers' ? (
           <OffersPage
             language={language}
+            onNavigate={setActivePage}
             onAddToCart={(item) => setCartItems((items) => [...items, item])}
           />
         ) : activePage === 'Cart' ? (
           <OrderPage
             language={language}
+            onNavigate={setActivePage}
             cartItems={cartItems}
             onIncrease={(item) => setCartItems((items) => [...items, item])}
             onDecrease={(itemId) => setCartItems((items) => {

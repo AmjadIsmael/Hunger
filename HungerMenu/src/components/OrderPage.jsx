@@ -93,6 +93,7 @@ const getItemPrice = (item) =>
 function OrderPage({
   language,
   cartItems,
+  onNavigate,
   onIncrease,
   onDecrease,
   onRemove,
@@ -322,7 +323,7 @@ function OrderPage({
         )}
       </section>
 
-      <Footer language={language} />
+      <Footer language={language} onNavigate={onNavigate} />
     </main>
   )
 }

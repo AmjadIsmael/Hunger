@@ -5,14 +5,16 @@ import './MenuPage.css'
 
 const copy = {
   en: {
-    eyebrow: 'Made fresh to order',
-    title: 'Our menu',
-    intro: 'Big cravings deserve bold flavor. Find your new favorite.',
-    categories: {
+       categories: {
       all: 'All',
-      burgers: 'Burgers',
-      chicken: 'Crispy Chicken',
-      wraps: 'Wraps',
+      'chicken-sandwiches': 'Chicken Sandwiches',
+      'beef-sandwiches': 'Beef Sandwiches',
+      vegetarian: 'Vegetarian',
+      'chicken-burgers': 'Chicken Burgers',
+      'beef-burgers': 'Beef Burgers',
+      appetizers: 'Appetizers',
+      dips: 'Dips',
+      drinks: 'Beverages',
     },
     add: 'Add to Cart',
     added: 'Added!',
@@ -24,9 +26,14 @@ const copy = {
     intro: 'الشهية الكبيرة تستحق نكهة غنية. اكتشف وجبتك المفضلة.',
     categories: {
       all: 'الكل',
-      burgers: 'البرغر',
-      chicken: 'الدجاج المقرمش',
-      wraps: 'الراب',
+      'chicken-sandwiches': 'ساندويشات الدجاج',
+      'beef-sandwiches': 'ساندويشات اللحم',
+      vegetarian: 'نباتي',
+      'chicken-burgers': 'برغر الدجاج',
+      'beef-burgers': 'برغر اللحم',
+      appetizers: 'المقبلات',
+      dips: 'الصوصات',
+      drinks: 'المشروبات',
     },
     add: 'أضف إلى السلة',
     added: 'تمت الإضافة!',
@@ -34,7 +41,17 @@ const copy = {
   },
 }
 
-const categories = ['all', 'burgers', 'chicken', 'wraps']
+const categories = [
+  'all',
+  'chicken-sandwiches',
+  'beef-sandwiches',
+  'vegetarian',
+  'chicken-burgers',
+  'beef-burgers',
+  'appetizers',
+  'dips',
+  'drinks',
+]
 
 function CartIcon() {
   return (
@@ -67,9 +84,7 @@ function MenuPage({ language, onAddToCart }) {
   return (
     <main className="menu-page">
       <header className="menu-hero">
-        <p>{content.eyebrow}</p>
-        <h1>{content.title}</h1>
-        <span>{content.intro}</span>
+        
       </header>
 
       <nav className="category-bar" aria-label={content.title}>

@@ -36,7 +36,7 @@ const copy = {
     storyStatTwo: 'Menu items',
     locationLabel: 'Find us',
     locationTitle: 'Come hungry. Leave happy.',
-    address: 'Al Ain, Baalbeck – Qaa',
+    address: 'Al Ain, Baalbeck ',
     hours: 'Open daily · 1:00 PM — 12:00 AM',
     directions: 'Get directions',
   },
@@ -69,7 +69,7 @@ const copy = {
     storyStatTwo: 'أصناف القائمة',
     locationLabel: 'زورونا',
     locationTitle: 'تعال جائعاً وغادر سعيداً.',
-    address: 'العين، بعلبك – القاع',
+    address: 'العين، بعلبك ',
     hours: 'يومياً · 1:00 ظهراً — 12:00 ليلاً',
     directions: 'الاتجاهات',
   },
@@ -86,7 +86,7 @@ function WhatsAppIcon() {
   )
 }
 
-function HomePage({ language }) {
+function HomePage({ language, onNavigate }) {
   const [activeSlide, setActiveSlide] = useState(0)
   const content = copy[language]
   const menuItemCount = String(menuItems.length).padStart(2, '0')
@@ -187,7 +187,7 @@ function HomePage({ language }) {
         />
       </section>
 
-      <Footer language={language} />
+      <Footer language={language} onNavigate={onNavigate} />
     </main>
   )
 }
