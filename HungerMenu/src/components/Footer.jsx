@@ -1,4 +1,4 @@
-import logo from '../assets/HungerLogo.png'
+import logo from '../assets/HungerLogo.webp'
 import './Footer.css'
 
 const copy = {
