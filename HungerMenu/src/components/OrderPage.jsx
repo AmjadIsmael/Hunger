@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import Footer from './Footer'
 import { formatPrice } from '../utils/currency'
+import { COMBO_CATEGORIES, getCartKey, getItemPrice } from '../utils/cart'
 import './OrderPage.css'
 
 const copy = {
@@ -35,6 +36,11 @@ const copy = {
     messageTitle: 'Hello Hungers! I would like to place this order:',
     messageTotal: 'Total',
     customerDetails: 'Customer details',
+    makeCombo: 'Make it a combo',
+    comboBadge: 'Combo',
+    comboSuffix: '(+ fries & drink)',
+    clearCart: 'Clear cart',
+    clearCartConfirm: 'Remove all items from your cart?',
   },
   ar: {
     title: 'طلبك',
@@ -67,6 +73,11 @@ const copy = {
     messageTitle: 'مرحباً هنغرز! أود تقديم الطلب التالي:',
     messageTotal: 'المجموع',
     customerDetails: 'معلومات الزبون',
+    makeCombo: 'حوّلها إلى وجبة',
+    comboBadge: 'وجبة',
+    comboSuffix: '(+ بطاطا ومشروب)',
+    clearCart: 'إفراغ السلة',
+    clearCartConfirm: 'هل تريد إزالة كل العناصر من السلة؟',
   },
 }
 
@@ -87,9 +98,6 @@ function WhatsAppIcon() {
   )
 }
 
-const getItemPrice = (item) =>
-  item.offer?.active ? item.offer.price : item.price
-
 function OrderPage({
   language,
   cartItems,
@@ -97,6 +105,8 @@ function OrderPage({
   onIncrease,
   onDecrease,
   onRemove,
+  onToggleCombo,
+  onClearCart,
   onBrowseMenu,
 }) {
   const content = copy[language]
@@ -111,8 +121,9 @@ function OrderPage({
   const groupedItems = useMemo(() => {
     const groups = new Map()
     cartItems.forEach((item) => {
-      const current = groups.get(item.id)
-      groups.set(item.id, current
+      const key = getCartKey(item)
+      const current = groups.get(key)
+      groups.set(key, current
         ? { ...current, quantity: current.quantity + 1 }
         : { ...item, quantity: 1 })
     })
@@ -126,6 +137,12 @@ function OrderPage({
 
   const updateCustomer = (field, value) => {
     setCustomer((details) => ({ ...details, [field]: value }))
+  }
+
+  const clearCart = () => {
+    if (window.confirm(content.clearCartConfirm)) {
+      onClearCart()
+    }
   }
 
   const placeOrder = (event) => {
@@ -150,7 +167,8 @@ function OrderPage({
       '',
       ...groupedItems.map((item) => {
         const price = getItemPrice(item)
-        return `• ${item.quantity} × ${item.name[language]} — ${formatPrice(price * item.quantity)}`
+        const comboTag = item.combo ? ` (${content.comboBadge})` : ''
+        return `• ${item.quantity} × ${item.name[language]}${comboTag} — ${formatPrice(price * item.quantity)}`
       }),
       '',
       `${content.messageTotal}: ${formatPrice(total)}`,
@@ -191,18 +209,33 @@ function OrderPage({
             <section className="order-items">
               {groupedItems.map((item) => {
                 const price = getItemPrice(item)
+                const comboEligible = COMBO_CATEGORIES.has(item.category)
+                const cartKey = getCartKey(item)
                 return (
-                  <article className="order-item" key={item.id}>
+                  <article className="order-item" key={cartKey}>
                     <img src={item.image} alt={item.name[language]} />
                     <div className="order-item-info">
                       <div>
                         <h2>{item.name[language]}</h2>
                         <p>{item.description[language]}</p>
+                        {comboEligible && (
+                          <label className="combo-toggle">
+                            <input
+                              type="checkbox"
+                              checked={!!item.combo}
+                              onChange={() => onToggleCombo(cartKey, !item.combo)}
+                            />
+                            <span>
+                              {item.combo ? content.comboBadge : content.makeCombo}
+                              <small>{content.comboSuffix}</small>
+                            </span>
+                          </label>
+                        )}
                       </div>
                       <button
                         className="remove-item"
                         type="button"
-                        onClick={() => onRemove(item.id)}
+                        onClick={() => onRemove(cartKey)}
                       >
                         <TrashIcon />
                         {content.remove}
@@ -214,7 +247,7 @@ function OrderPage({
                         <button
                           type="button"
                           aria-label={content.decrease}
-                          onClick={() => onDecrease(item.id)}
+                          onClick={() => onDecrease(cartKey)}
                         >
                           −
                         </button>
@@ -231,6 +264,15 @@ function OrderPage({
                   </article>
                 )
               })}
+
+              <button
+                className="clear-cart-button"
+                type="button"
+                onClick={clearCart}
+              >
+                <TrashIcon />
+                {content.clearCart}
+              </button>
             </section>
 
             <aside className="order-summary">

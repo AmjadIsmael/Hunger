@@ -39,3 +39,36 @@ button:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
+
+.combo-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.combo-toggle input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+.combo-toggle span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--cream);
+  font-size: 0.74rem;
+  font-weight: 750;
+}
+
+.combo-toggle small {
+  color: var(--muted);
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.combo-toggle:has(input:checked) span {
+  color: var(--gold);
+}

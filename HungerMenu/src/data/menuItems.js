@@ -1,13 +1,13 @@
-import burgerImage from '../assets/hero-burger-optimized.jpg'
-import chickenImage from '../assets/hero-crispy-chicken-optimized.jpg'
-import wrapImage from '../assets/hero-wrap-optimized.jpg'
-import chickenSubImage from '../assets/chickensup-optimized.jpg'
-import francescoImage from '../assets/fransisco-optimized.jpg'
-import fajitaImage from '../assets/fahita-optimized.jpg'
-import chickensupremeImage from '../assets/chickensupreme-optimized.jpg'
-import tawookImage from '../assets/tawook-optimized.jpg'
-import sojukImage from '../assets/sojuk-optimized.jpg'
-import mexicanaImage from '../assets/mexicana-optimized.jpg'
+import burgerImage from '../assets/hero-burger-optimized.webp'
+import chickenImage from '../assets/hero-crispy-chicken-optimized.webp'
+import wrapImage from '../assets/hero-wrap-optimized.webp'
+import chickenSubImage from '../assets/chickensup-optimized.webp'
+import francescoImage from '../assets/fransisco-optimized.webp'
+import fajitaImage from '../assets/fahita-optimized.webp'
+import chickensupremeImage from '../assets/chickensupreme-optimized.webp'
+import tawookImage from '../assets/tawook-optimized.webp'
+import sojukImage from '../assets/sojuk-optimized.webp'
+import mexicanaImage from '../assets/mexicana-optimized.webp'
 
 const item = (id, category, image, price, enName, arName, enDescription, arDescription) => ({
   id,

@@ -5,6 +5,7 @@ import MenuPage from './components/MenuPage'
 import OffersPage from './components/OffersPage'
 import OrderPage from './components/OrderPage'
 import SplashScreen from './components/SplashScreen'
+import { getCartKey } from './utils/cart'
 import './App.css'
 
 const pageCopy = {
@@ -72,14 +73,17 @@ function App() {
             onNavigate={setActivePage}
             cartItems={cartItems}
             onIncrease={(item) => setCartItems((items) => [...items, item])}
-            onDecrease={(itemId) => setCartItems((items) => {
-              const itemIndex = items.findIndex((item) => item.id === itemId)
+            onDecrease={(cartKey) => setCartItems((items) => {
+              const itemIndex = items.findIndex((item) => getCartKey(item) === cartKey)
               return itemIndex === -1
                 ? items
                 : items.filter((_, index) => index !== itemIndex)
             })}
-            onRemove={(itemId) => setCartItems((items) =>
-              items.filter((item) => item.id !== itemId))}
+            onRemove={(cartKey) => setCartItems((items) =>
+              items.filter((item) => getCartKey(item) !== cartKey))}
+            onToggleCombo={(cartKey, nextCombo) => setCartItems((items) =>
+              items.map((item) => (getCartKey(item) === cartKey ? { ...item, combo: nextCombo } : item)))}
+            onClearCart={() => setCartItems([])}
             onBrowseMenu={() => setActivePage('Menu')}
           />
         ) : (
