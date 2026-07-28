@@ -179,7 +179,7 @@ function MenuPage({ language, onAddToCart }) {
               }
             }}
           >
-            <span className="menu-row-image">
+            <span className={`menu-row-image${['drinks', 'dips'].includes(item.category) ? ' centered-image' : ''}`}>
               <img src={item.image} alt={item.name[language]} />
             </span>
             <span className="menu-row-info">
@@ -218,7 +218,7 @@ function MenuPage({ language, onAddToCart }) {
             </button>
 
             <img
-              className="item-modal-image"
+              className={`item-modal-image${['drinks', 'dips'].includes(selectedItem.category) ? ' centered-image' : ''}`}
               src={selectedItem.image}
               alt={selectedItem.name[language]}
             />

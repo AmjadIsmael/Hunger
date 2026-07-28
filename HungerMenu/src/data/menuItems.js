@@ -8,7 +8,22 @@ import chickensupremeImage from '../assets/chickensupreme-optimized.webp'
 import tawookImage from '../assets/tawook-optimized.webp'
 import sojukImage from '../assets/sojuk-optimized.webp'
 import mexicanaImage from '../assets/mexicana-optimized.webp'
-
+import chickenpestoImage from '../assets/chicken pesto.png'
+import philadelphiaImage from '../assets/pheldelphia.png'
+import rostoImage from '../assets/rosto.png'
+import friesImage from '../assets/fries.png'
+import pepsiImage from '../assets/pepsi-optimized.webp'
+import pepsiDietImage from '../assets/pepsi-diet-optimized.webp'
+import sevenUpImage from '../assets/seven-up-optimized.webp'
+import sevenUpDietImage from '../assets/seven-up-diet-optimized.webp'
+import mirindaImage from '../assets/mirinda-optimized.webp'
+import ayranImage from '../assets/ayran-optimized.webp'
+import waterImage from '../assets/water-optimized.webp'
+import garlicDipImage from '../assets/garlic-dip-optimized.webp'
+import spicyDipImage from '../assets/spicy-dip-optimized.webp'
+import honeyMustardDipImage from '../assets/honey-mustard-dip-optimized.webp'
+import barbecueDipImage from '../assets/barbecue-dip-optimized.webp'
+import cocktailDipImage from '../assets/cocktail-dip-optimized.webp'
 const item = (id, category, image, price, enName, arName, enDescription, arDescription) => ({
   id,
   category,
@@ -28,9 +43,6 @@ const menuItems = [
   item('chicken-supreme', 'chicken-sandwiches', chickensupremeImage, 550000, 'Chicken Supreme', 'تشيكن سوبريم',
     'Grilled chicken, turkey, mushrooms, mozzarella, lettuce, mayonnaise, and garlic sauce.',
     'دجاج مشوي، حبش، فطر، موزاريلا، خس، مايونيز وصلصة الثوم.'),
-  item('zinger', 'chicken-sandwiches', chickenImage, 500000, 'Zinger', 'زنجر',
-    'Spicy crispy chicken, lettuce, pickles, cheddar, and spicy mayonnaise.',
-    'دجاج حار ومقرمش، خس، مخلل، شيدر ومايونيز حار.'),
   item('crispy', 'chicken-sandwiches', chickenImage, 500000, 'Crispy', 'كريسبي',
     'Golden crispy chicken, lettuce, tomato, pickles, cheddar, mayonnaise, and garlic sauce.',
     'دجاج ذهبي مقرمش، خس، طماطم، مخلل، شيدر، مايونيز وصلصة الثوم.'),
@@ -43,24 +55,21 @@ const menuItems = [
   item('tawook', 'chicken-sandwiches', tawookImage, 500000, 'Tawook', 'طاووق',
     'Marinated tawook, pickles, French fries, coleslaw, and garlic sauce.',
     'طاووق متبل، مخلل، بطاطا مقلية، كولسلو وصلصة الثوم.'),
-  item('chicken-honey-mustard', 'chicken-sandwiches', wrapImage, 550000, 'Chicken Honey Mustard', 'تشيكن هاني ماسترد',
-    'Grilled chicken, lettuce, tomato, cheddar, crispy onions, and honey mustard.',
-    'دجاج مشوي، خس، طماطم، شيدر، بصل مقرمش وصلصة العسل والخردل.'),
-  item('chicken-pesto', 'chicken-sandwiches', wrapImage, 550000, 'Chicken Pesto', 'تشيكن بيستو',
+  item('chicken-pesto', 'chicken-sandwiches', chickenpestoImage, 550000, 'Chicken Pesto', 'تشيكن بيستو',
     'Grilled chicken, mozzarella, tomato, rocket leaves, and creamy pesto sauce.',
     'دجاج مشوي، موزاريلا، طماطم، روكا وصلصة بيستو كريمية.'),
 
-  item('philadelphia', 'beef-sandwiches', burgerImage, 550000, 'Philadelphia', 'فيلادلفيا',
+  item('philadelphia', 'beef-sandwiches', philadelphiaImage, 550000, 'Philadelphia', 'فيلادلفيا',
     'Tender beef, sautéed onions, green peppers, mushrooms, mozzarella, and special sauce.',
     'لحم طري، بصل، فليفلة خضراء، فطر، موزاريلا وصلصة خاصة.'),
-  item('rosto', 'beef-sandwiches', burgerImage, 550000, 'Rosto', 'روستو',
+  item('rosto', 'beef-sandwiches', rostoImage, 550000, 'Rosto', 'روستو',
     'Roast beef, lettuce, tomato, pickles, cheddar, mayonnaise, and mustard.',
     'روست بيف، خس، طماطم، مخلل، شيدر، مايونيز وخردل.'),
   item('sojuk', 'beef-sandwiches', sojukImage, 500000, 'Sojuk', 'سجق',
     'Spicy sojuk, tomato, pickles, onions, mozzarella, and garlic or spicy sauce.',
     'سجق حار، طماطم، مخلل، بصل، موزاريلا وصلصة ثوم أو حارة.'),
 
-  item('batata', 'vegetarian', wrapImage, 350000, 'Batata', 'بطاطا',
+  item('batata', 'vegetarian', friesImage, 350000, 'Batata', 'بطاطا',
     'Crispy fries, coleslaw, pickles, ketchup, mayonnaise, and garlic sauce.',
     'بطاطا مقلية، كولسلو، مخلل، كاتشب، مايونيز وصلصة الثوم.'),
 
@@ -93,36 +102,47 @@ const menuItems = [
     'Double beef, crispy chicken or turkey, cheddar, mozzarella, vegetables, and HUNGERS sauce.',
     'قطعتان لحم، دجاج مقرمش أو حبش، شيدر، موزاريلا، خضار وصلصة هنغرز.'),
 
-  item('regular-fries', 'appetizers', chickenImage, 150000, 'Regular Fries', 'بطاطا عادية',
+  item('regular-fries', 'appetizers', friesImage, 150000, 'Regular Fries', 'بطاطا عادية',
     'Golden crispy French fries.', 'بطاطا مقلية ذهبية ومقرمشة.'),
-  item('spicy-fries', 'appetizers', chickenImage, 200000, 'Spicy Fries', 'بطاطا حارة',
+  item('spicy-fries', 'appetizers', friesImage, 200000, 'Spicy Fries', 'بطاطا حارة',
     'Crispy fries tossed in our spicy seasoning.', 'بطاطا مقرمشة مع بهاراتنا الحارة.'),
-  item('cheesy-fries', 'appetizers', chickenImage, 300000, 'Cheesy Fries', 'بطاطا بالجبنة',
+  item('cheesy-fries', 'appetizers', friesImage, 300000, 'Cheesy Fries', 'بطاطا بالجبنة',
     'Golden fries covered with melted cheese.', 'بطاطا ذهبية مغطاة بالجبنة الذائبة.'),
-  item('loaded-fries', 'appetizers', chickenImage, 350000, 'Loaded Fries', 'لودد فرايز',
+  item('loaded-fries', 'appetizers', friesImage, 350000, 'Loaded Fries', 'لودد فرايز',
     'Fries loaded with cheese, sauce, and savory toppings.', 'بطاطا مع جبنة وصلصة وإضافات شهية.'),
-  item('onion-rings', 'appetizers', chickenImage, 250000, 'Onion Rings', 'حلقات البصل',
+  item('onion-rings', 'appetizers', friesImage, 250000, 'Onion Rings', 'حلقات البصل',
     'Crispy golden battered onion rings.', 'حلقات بصل ذهبية ومقرمشة.'),
   item('coleslaw', 'appetizers', wrapImage, 150000, 'Coleslaw', 'كولسلو',
     'Fresh creamy house-made coleslaw.', 'سلطة كولسلو طازجة وكريمية.'),
 
-  item('garlic-dip', 'dips', wrapImage, 50000, 'Garlic Dip', 'صلصة الثوم',
+  item('garlic-dip', 'dips', garlicDipImage, 50000, 'Garlic Dip', 'صلصة الثوم',
     'Creamy house-made garlic dip.', 'صلصة ثوم كريمية محضرة في المطعم.'),
-  item('spicy-dip', 'dips', chickenImage, 50000, 'Spicy Dip', 'صلصة حارة',
+  item('spicy-dip', 'dips', spicyDipImage, 50000, 'Spicy Dip', 'صلصة حارة',
     'A creamy dip with a bold spicy kick.', 'صلصة كريمية بنكهة حارة وقوية.'),
-  item('honey-mustard-dip', 'dips', wrapImage, 75000, 'Honey Mustard Dip', 'صلصة العسل والخردل',
+  item('honey-mustard-dip', 'dips', honeyMustardDipImage, 75000, 'Honey Mustard Dip', 'صلصة العسل والخردل',
     'Sweet and tangy honey mustard dip.', 'صلصة العسل والخردل الحلوة والحامضة.'),
+  item('barbecue-dip', 'dips', barbecueDipImage, 50000, 'Barbecue Dip', 'صلصة الباربكيو',
+    'Smoky and sweet barbecue dip.', 'صلصة باربكيو مدخنة وحلوة.'),
+  item('cocktail-dip', 'dips', cocktailDipImage, 50000, 'Cocktail Dip', 'صلصة الكوكتيل',
+    'Tangy tomato-based cocktail dip.', 'صلصة كوكتيل بنكهة الطماطم.'),
   item('hungers-special-dip', 'dips', burgerImage, 75000, 'HUNGERS Special Dip', 'صلصة هنغرز الخاصة',
     'Our rich and creamy signature HUNGERS sauce.', 'صلصة هنغرز الخاصة الغنية والكريمية.'),
 
-  item('soft-drinks', 'drinks', burgerImage, 100000, 'Soft Drinks', 'مشروبات غازية',
-    'Your choice of chilled soft drink.', 'اختيارك من المشروبات الغازية الباردة.'),
-  item('water', 'drinks', burgerImage, 50000, 'Water', 'مياه',
+  item('pepsi', 'drinks', pepsiImage, 100000, 'Pepsi', 'بيبسي',
+    'Chilled classic Pepsi.', 'بيبسي باردة.'),
+  item('diet-pepsi', 'drinks', pepsiDietImage, 100000, 'Diet Pepsi', 'بيبسي دايت',
+    'Chilled Diet Pepsi.', 'بيبسي دايت باردة.'),
+  item('seven-up', 'drinks', sevenUpImage, 100000, 'Seven Up', 'سفن أب',
+    'Chilled classic Seven Up.', 'سفن أب باردة.'),
+  item('diet-seven-up', 'drinks', sevenUpDietImage, 100000, 'Diet Seven Up', 'سفن أب دايت',
+    'Chilled Diet Seven Up.', 'سفن أب دايت باردة.'),
+  item('mirinda', 'drinks', mirindaImage, 100000, 'Mirinda', 'ميراندا',
+    'Chilled classic Mirinda.', 'ميراندا باردة.'),
+  item('water', 'drinks', waterImage, 50000, 'Water', 'مياه',
     'Chilled bottled water.', 'عبوة مياه باردة.'),
-  item('ayran', 'drinks', burgerImage, 100000, 'Ayran', 'عيران',
+  item('ayran', 'drinks', ayranImage, 100000, 'Ayran', 'عيران',
     'Cold and refreshing ayran.', 'عيران بارد ومنعش.'),
-  item('fresh-juice', 'drinks', wrapImage, 200000, 'Fresh Juice', 'عصير طازج',
-    'Freshly prepared seasonal juice.', 'عصير موسمي محضر طازجاً.'),
+ 
 ]
 
 export default menuItems
