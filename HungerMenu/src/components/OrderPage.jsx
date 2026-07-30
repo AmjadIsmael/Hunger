@@ -36,9 +36,11 @@ const copy = {
     messageTitle: 'Hello Hungers! I would like to place this order:',
     messageTotal: 'Total',
     customerDetails: 'Customer details',
-    makeCombo: 'Make it a combo',
+    regular: 'Regular',
     comboBadge: 'Combo',
     comboSuffix: '(+ fries & drink)',
+    makeCombo: 'Make it combo',
+    makeRegular: 'Make it regular',
     clearCart: 'Clear cart',
     clearCartConfirm: 'Remove all items from your cart?',
   },
@@ -73,9 +75,11 @@ const copy = {
     messageTitle: 'مرحباً هنغرز! أود تقديم الطلب التالي:',
     messageTotal: 'المجموع',
     customerDetails: 'معلومات الزبون',
-    makeCombo: 'حوّلها إلى وجبة',
+    regular: 'عادي',
     comboBadge: 'وجبة',
     comboSuffix: '(+ بطاطا ومشروب)',
+    makeCombo: 'حوّلها إلى وجبة',
+    makeRegular: 'حوّلها عادية',
     clearCart: 'إفراغ السلة',
     clearCartConfirm: 'هل تريد إزالة كل العناصر من السلة؟',
   },
@@ -105,7 +109,7 @@ function OrderPage({
   onIncrease,
   onDecrease,
   onRemove,
-  onToggleCombo,
+  onConvertCombo,
   onClearCart,
   onBrowseMenu,
 }) {
@@ -121,19 +125,31 @@ function OrderPage({
   const groupedItems = useMemo(() => {
     const groups = new Map()
     cartItems.forEach((item) => {
-      const key = getCartKey(item)
-      const current = groups.get(key)
-      groups.set(key, current
-        ? { ...current, quantity: current.quantity + 1 }
-        : { ...item, quantity: 1 })
+      const current = groups.get(item.id)
+      if (current) {
+        if (item.combo) current.comboQty += 1
+        else current.regularQty += 1
+      } else {
+        groups.set(item.id, {
+          base: item,
+          id: item.id,
+          category: item.category,
+          image: item.image,
+          name: item.name,
+          description: item.description,
+          regularQty: item.combo ? 0 : 1,
+          comboQty: item.combo ? 1 : 0,
+        })
+      }
     })
     return [...groups.values()]
   }, [cartItems])
 
-  const total = groupedItems.reduce(
-    (sum, item) => sum + getItemPrice(item) * item.quantity,
-    0,
-  )
+  const total = groupedItems.reduce((sum, group) => {
+    const regularPrice = getItemPrice({ ...group.base, combo: false })
+    const comboPrice = getItemPrice({ ...group.base, combo: true })
+    return sum + regularPrice * group.regularQty + comboPrice * group.comboQty
+  }, 0)
 
   const updateCustomer = (field, value) => {
     setCustomer((details) => ({ ...details, [field]: value }))
@@ -165,10 +181,17 @@ function OrderPage({
     const whatsappMessage = [
       content.messageTitle,
       '',
-      ...groupedItems.map((item) => {
-        const price = getItemPrice(item)
-        const comboTag = item.combo ? ` (${content.comboBadge})` : ''
-        return `• ${item.quantity} × ${item.name[language]}${comboTag} — ${formatPrice(price * item.quantity)}`
+      ...groupedItems.flatMap((group) => {
+        const lines = []
+        if (group.regularQty > 0) {
+          const price = getItemPrice({ ...group.base, combo: false })
+          lines.push(`• ${group.regularQty} × ${group.name[language]} — ${formatPrice(price * group.regularQty)}`)
+        }
+        if (group.comboQty > 0) {
+          const price = getItemPrice({ ...group.base, combo: true })
+          lines.push(`• ${group.comboQty} × ${group.name[language]} (${content.comboBadge}) — ${formatPrice(price * group.comboQty)}`)
+        }
+        return lines
       }),
       '',
       `${content.messageTotal}: ${formatPrice(total)}`,
@@ -207,58 +230,94 @@ function OrderPage({
         ) : (
           <div className="order-layout">
             <section className="order-items">
-              {groupedItems.map((item) => {
-                const price = getItemPrice(item)
-                const comboEligible = COMBO_CATEGORIES.has(item.category)
-                const cartKey = getCartKey(item)
+              {groupedItems.map((group) => {
+                const comboEligible = COMBO_CATEGORIES.has(group.category)
+                const regularItem = { ...group.base, combo: false }
+                const comboItem = { ...group.base, combo: true }
+                const regularPrice = getItemPrice(regularItem)
+                const comboPrice = getItemPrice(comboItem)
+                const groupTotal = regularPrice * group.regularQty + comboPrice * group.comboQty
                 return (
-                  <article className="order-item" key={cartKey}>
-                    <img src={item.image} alt={item.name[language]} />
+                  <article className="order-item" key={group.id}>
+                    <img src={group.image} alt={group.name[language]} />
                     <div className="order-item-info">
                       <div>
-                        <h2>{item.name[language]}</h2>
-                        <p>{item.description[language]}</p>
-                        {comboEligible && (
-                          <label className="combo-toggle">
-                            <input
-                              type="checkbox"
-                              checked={!!item.combo}
-                              onChange={() => onToggleCombo(cartKey, !item.combo)}
-                            />
-                            <span>
-                              {item.combo ? content.comboBadge : content.makeCombo}
-                              <small>{content.comboSuffix}</small>
-                            </span>
-                          </label>
+                        <h2>{group.name[language]}</h2>
+                        <p>{group.description[language]}</p>
+                        <div className="variant-groups">
+                        {group.regularQty > 0 && (
+                          <div className="variant-row">
+                            <div className="quantity-control">
+                              <button
+                                type="button"
+                                aria-label={content.decrease}
+                                onClick={() => onDecrease(getCartKey(regularItem))}
+                              >
+                                −
+                              </button>
+                              <span>{group.regularQty}</span>
+                              <button
+                                type="button"
+                                aria-label={content.increase}
+                                onClick={() => onIncrease(regularItem)}
+                              >
+                                +
+                              </button>
+                            </div>
+                            <span className="variant-label">{content.regular}</span>
+                            {comboEligible && (
+                              <button
+                                type="button"
+                                className="convert-link"
+                                onClick={() => onConvertCombo(regularItem, true)}
+                              >
+                                {content.makeCombo}
+                              </button>
+                            )}
+                          </div>
                         )}
+
+                        {group.comboQty > 0 && (
+                          <div className="variant-row">
+                            <div className="quantity-control">
+                              <button
+                                type="button"
+                                aria-label={content.decrease}
+                                onClick={() => onDecrease(getCartKey(comboItem))}
+                              >
+                                −
+                              </button>
+                              <span>{group.comboQty}</span>
+                              <button
+                                type="button"
+                                aria-label={content.increase}
+                                onClick={() => onIncrease(comboItem)}
+                              >
+                                +
+                              </button>
+                            </div>
+                            <span className="variant-label combo">{content.comboBadge}</span>
+                            <button
+                              type="button"
+                              className="convert-link"
+                              onClick={() => onConvertCombo(comboItem, false)}
+                            >
+                              {content.makeRegular}
+                            </button>
+                          </div>
+                        )}
+                        </div>
                       </div>
-                      <button
-                        className="remove-item"
-                        type="button"
-                        onClick={() => onRemove(cartKey)}
-                      >
-                        <TrashIcon />
-                        {content.remove}
-                      </button>
-                    </div>
-                    <div className="order-item-actions">
-                      <strong>{formatPrice(price * item.quantity)}</strong>
-                      <div className="quantity-control">
+                      <div className="order-item-footer">
                         <button
+                          className="remove-item"
                           type="button"
-                          aria-label={content.decrease}
-                          onClick={() => onDecrease(cartKey)}
+                          onClick={() => onRemove(group.base)}
                         >
-                          −
+                          <TrashIcon />
+                          {content.remove}
                         </button>
-                        <span>{item.quantity}</span>
-                        <button
-                          type="button"
-                          aria-label={content.increase}
-                          onClick={() => onIncrease(item)}
-                        >
-                          +
-                        </button>
+                        <strong className="order-item-price">{formatPrice(groupTotal)}</strong>
                       </div>
                     </div>
                   </article>

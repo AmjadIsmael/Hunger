@@ -1,0 +1,148 @@
+.toast-viewport {
+  position: fixed;
+  top: 92px;
+  left: 50%;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  width: min(420px, calc(100vw - 32px));
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  animation: toast-in 260ms ease-out both;
+  pointer-events: auto;
+}
+
+.toast-viewport.leaving .toast {
+  animation: toast-out 240ms ease-in both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+}
+
+.toast-check {
+  display: grid;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 999px;
+  color: #171205;
+  background: var(--gold);
+}
+
+.toast-check svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.4;
+}
+
+.toast-check.removal {
+  color: #a8a295;
+  background: #2a2925;
+}
+
+.toast-check.removal svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 1.8;
+}
+
+.toast-image {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #0a0a08;
+  object-fit: cover;
+  object-position: 68% center;
+}
+
+.toast-info {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toast-info strong {
+  overflow: hidden;
+  color: var(--cream);
+  font-size: 0.86rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toast-info span {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.toast-view-cart {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 193, 7, 0.35);
+  border-radius: 10px;
+  color: var(--gold);
+  background: transparent;
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.toast-view-cart:hover {
+  background: rgba(255, 193, 7, 0.12);
+}
+
+@media (max-width: 720px) {
+  .toast-viewport {
+    top: 80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .toast-viewport.leaving .toast {
+    animation-duration: 1ms;
+  }
+}
