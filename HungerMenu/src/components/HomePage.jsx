@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import burgerImage from '../assets/hero-burger-optimized.webp'
 import chickenImage from '../assets/hero-crispy-chicken-optimized.webp'
 import wrapImage from '../assets/hero-wrap-optimized.webp'
+import burgersImage from '../assets/hero_burgers.webp'
 import menuItems from '../data/menuItems'
 import Footer from './Footer'
 import './HomePage.css'
@@ -23,6 +24,11 @@ const copy = {
         eyebrow: 'Wrapped fresh',
         title: 'Big flavor, all wrapped up.',
         description: 'Grilled chicken, crisp vegetables, pickles, and creamy garlic sauce in every bite.',
+      },
+      {
+        eyebrow: 'Stacked & loaded',
+        title: 'Burgers built to crave.',
+        description: 'Juicy beef, melted cheese, and bold sauces piled high in every bite.',
       },
     ],
     delivery: 'Fast Delivery to Your Door',
@@ -57,6 +63,11 @@ const copy = {
         title: 'نكهة كبيرة في كل لفة.',
         description: 'دجاج مشوي وخضار طازجة ومخلل وصلصة الثوم الكريمية في كل لقمة.',
       },
+      {
+        eyebrow: 'محمّل بالنكهة',
+        title: 'برغر يستحق الرغبة.',
+        description: 'لحم طري وجبنة ذائبة وصلصات جريئة في كل طبقة.',
+      },
     ],
     delivery: 'توصيل سريع إلى بابك',
     order: 'اطلب عبر واتساب',
@@ -75,7 +86,7 @@ const copy = {
   },
 }
 
-const slideImages = [burgerImage, chickenImage, wrapImage]
+const slideImages = [burgerImage, chickenImage, wrapImage, burgersImage]
 
 function WhatsAppIcon() {
   return (

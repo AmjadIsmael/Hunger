@@ -24,6 +24,16 @@ import spicyDipImage from '../assets/spicy-dip-optimized.webp'
 import honeyMustardDipImage from '../assets/honey-mustard-dip-optimized.webp'
 import barbecueDipImage from '../assets/barbecue-dip-optimized.webp'
 import cocktailDipImage from '../assets/cocktail-dip-optimized.webp'
+import crispyChickenImage from '../assets/crispy.webp'
+import chickenBurgerImage from '../assets/chicken burger.webp'
+import chickenMushroomBurgerImage from '../assets/chicken mushroom.webp'
+import chickenMozzarellaBurgerImage from '../assets/chicken mozzarella burger.webp'
+import mushroomBurgerImage from '../assets/mushroom.webp'
+import mozzarellaBurgerImage from '../assets/mozzarella meat burger.webp'
+import smashedBurgerImage from '../assets/smashed.webp'
+import lebaneseBurgerImage from '../assets/lebanese.webp'
+import americanBurgerImage from '../assets/american.webp'
+
 const item = (id, category, image, price, enName, arName, enDescription, arDescription) => ({
   id,
   category,
@@ -43,7 +53,7 @@ const menuItems = [
   item('chicken-supreme', 'chicken-sandwiches', chickensupremeImage, 550000, 'Chicken Supreme', 'تشيكن سوبريم',
     'Grilled chicken, turkey, mushrooms, mozzarella, lettuce, mayonnaise, and garlic sauce.',
     'دجاج مشوي، حبش، فطر، موزاريلا، خس، مايونيز وصلصة الثوم.'),
-  item('crispy', 'chicken-sandwiches', chickenImage, 500000, 'Crispy', 'كريسبي',
+  item('crispy', 'chicken-sandwiches', crispyChickenImage, 500000, 'Crispy', 'كريسبي',
     'Golden crispy chicken, lettuce, tomato, pickles, cheddar, mayonnaise, and garlic sauce.',
     'دجاج ذهبي مقرمش، خس، طماطم، مخلل، شيدر، مايونيز وصلصة الثوم.'),
   item('mexicana', 'chicken-sandwiches', mexicanaImage, 550000, 'Mexicana', 'مكسيكانا',
@@ -73,29 +83,29 @@ const menuItems = [
     'Crispy fries, coleslaw, pickles, ketchup, mayonnaise, and garlic sauce.',
     'بطاطا مقلية، كولسلو، مخلل، كاتشب، مايونيز وصلصة الثوم.'),
 
-  item('chicken-burger', 'chicken-burgers', chickenImage, 500000, 'Chicken Burger', 'تشيكن برغر',
+  item('chicken-burger', 'chicken-burgers', chickenBurgerImage, 500000, 'Chicken Burger', 'تشيكن برغر',
     'Grilled or crispy chicken, lettuce, tomato, pickles, cheddar, and mayonnaise.',
     'دجاج مشوي أو مقرمش، خس، طماطم، مخلل، شيدر ومايونيز.'),
-  item('chicken-mushroom-burger', 'chicken-burgers', chickenImage, 550000, 'Chicken Mushroom Burger', 'تشيكن مشروم برغر',
+  item('chicken-mushroom-burger', 'chicken-burgers', chickenMushroomBurgerImage, 550000, 'Chicken Mushroom Burger', 'تشيكن مشروم برغر',
     'Chicken patty, sautéed mushrooms, mozzarella, lettuce, and creamy mushroom sauce.',
     'قطعة دجاج، فطر، موزاريلا، خس وصلصة فطر كريمية.'),
-  item('chicken-mozzarella-burger', 'chicken-burgers', chickenImage, 550000, 'Chicken Mozzarella Burger', 'تشيكن موزاريلا برغر',
+  item('chicken-mozzarella-burger', 'chicken-burgers', chickenMozzarellaBurgerImage, 550000, 'Chicken Mozzarella Burger', 'تشيكن موزاريلا برغر',
     'Chicken patty, melted mozzarella, lettuce, tomato, pickles, and garlic mayonnaise.',
     'قطعة دجاج، موزاريلا، خس، طماطم، مخلل ومايونيز بالثوم.'),
 
-  item('classic-beef-burger', 'beef-burgers', burgerImage, 500000, 'Classic Beef Burger', 'كلاسيك بيف برغر',
+  item('classic-beef-burger', 'beef-burgers', americanBurgerImage, 500000, 'Classic Beef Burger', 'كلاسيك بيف برغر',
     'Beef patty, lettuce, tomato, pickles, onions, cheddar, and classic burger sauce.',
     'قطعة لحم، خس، طماطم، مخلل، بصل، شيدر وصلصة البرغر.'),
-  item('lebanese-burger', 'beef-burgers', burgerImage, 500000, 'Lebanese Burger', 'برغر لبناني',
+  item('lebanese-burger', 'beef-burgers', lebaneseBurgerImage, 500000, 'Lebanese Burger', 'برغر لبناني',
     'Beef patty, coleslaw, fries, tomato, pickles, ketchup, and mayonnaise.',
     'قطعة لحم، كولسلو، بطاطا، طماطم، مخلل، كاتشب ومايونيز.'),
-  item('mushroom-burger', 'beef-burgers', burgerImage, 550000, 'Mushroom Burger', 'مشروم برغر',
+  item('mushroom-burger', 'beef-burgers', mushroomBurgerImage, 550000, 'Mushroom Burger', 'مشروم برغر',
     'Beef patty, sautéed mushrooms, melted cheese, caramelized onions, and mushroom sauce.',
     'قطعة لحم، فطر، جبنة، بصل مكرمل وصلصة الفطر.'),
-  item('mozzarella-burger', 'beef-burgers', burgerImage, 550000, 'Mozzarella Burger', 'موزاريلا برغر',
+  item('mozzarella-burger', 'beef-burgers', mozzarellaBurgerImage, 550000, 'Mozzarella Burger', 'موزاريلا برغر',
     'Beef patty, melted mozzarella, lettuce, tomato, onions, pickles, and burger sauce.',
     'قطعة لحم، موزاريلا، خس، طماطم، بصل، مخلل وصلصة البرغر.'),
-  item('smashed-burger', 'beef-burgers', burgerImage, 550000, 'Smashed Burger', 'سماش برغر',
+  item('smashed-burger', 'beef-burgers', smashedBurgerImage, 550000, 'Smashed Burger', 'سماش برغر',
     'Two smashed beef patties, cheddar, grilled onions, pickles, and HUNGERS sauce.',
     'قطعتان لحم سماش، شيدر، بصل مشوي، مخلل وصلصة هنغرز.'),
   item('hungers-special-burger', 'beef-burgers', burgerImage, 650000, 'HUNGERS Special Burger', 'برغر هنغرز الخاص',
