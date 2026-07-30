@@ -29,6 +29,9 @@ const copy = {
     chooseOne: 'Choose one',
     subtotal: 'Subtotal',
     cancel: 'Cancel',
+    quantity: 'Quantity',
+    decrease: 'Decrease quantity',
+    increase: 'Increase quantity',
   },
   ar: {
     eyebrow: 'نحضّرها طازجة عند الطلب',
@@ -56,6 +59,9 @@ const copy = {
     chooseOne: 'اختر واحدة',
     subtotal: 'المجموع الفرعي',
     cancel: 'إلغاء',
+    quantity: 'الكمية',
+    decrease: 'تقليل الكمية',
+    increase: 'زيادة الكمية',
   },
 }
 
@@ -93,6 +99,7 @@ function MenuPage({ language, onAddToCart }) {
   const [activeCategory, setActiveCategory] = useState('all')
   const [selectedItem, setSelectedItem] = useState(null)
   const [isCombo, setIsCombo] = useState(false)
+  const [quantity, setQuantity] = useState(1)
   const [recentlyAdded, setRecentlyAdded] = useState(null)
   const listRef = useRef(null)
   const isFirstRender = useRef(true)
@@ -130,16 +137,19 @@ function MenuPage({ language, onAddToCart }) {
   const openItem = (item) => {
     setSelectedItem(item)
     setIsCombo(false)
+    setQuantity(1)
   }
 
-  const addItem = (item, combo) => {
-    onAddToCart({ ...item, combo })
+  const addItem = (item, combo, qty = 1) => {
+    for (let i = 0; i < qty; i += 1) {
+      onAddToCart({ ...item, combo })
+    }
     setRecentlyAdded(item.id)
     window.setTimeout(() => setRecentlyAdded(null), 900)
   }
 
-  const addFromModal = (item, combo) => {
-    addItem(item, combo)
+  const addFromModal = (item, combo, qty) => {
+    addItem(item, combo, qty)
     window.setTimeout(() => setSelectedItem(null), 500)
   }
 
@@ -230,6 +240,28 @@ function MenuPage({ language, onAddToCart }) {
                 <strong>{formatPrice(selectedItem.price)}</strong>
               </div>
 
+              <div className="item-modal-quantity">
+                <span>{content.quantity}</span>
+                <div className="item-quantity-control">
+                  <button
+                    type="button"
+                    aria-label={content.decrease}
+                    disabled={quantity <= 1}
+                    onClick={() => setQuantity((value) => Math.max(1, value - 1))}
+                  >
+                    −
+                  </button>
+                  <span>{quantity}</span>
+                  <button
+                    type="button"
+                    aria-label={content.increase}
+                    onClick={() => setQuantity((value) => value + 1)}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
               {COMBO_CATEGORIES.has(selectedItem.category) && (
                 <div className="item-modal-customize">
                   <div className="item-modal-customize-heading">
@@ -240,7 +272,7 @@ function MenuPage({ language, onAddToCart }) {
                     <div className="current-total">
                       <small>{content.currentTotal}</small>
                       <strong>
-                        {formatPrice(getItemPrice({ ...selectedItem, combo: isCombo }))}
+                        {formatPrice(getItemPrice({ ...selectedItem, combo: isCombo }) * quantity)}
                       </strong>
                     </div>
                   </div>
@@ -267,7 +299,7 @@ function MenuPage({ language, onAddToCart }) {
                 <div className="item-modal-subtotal">
                   <small>{content.subtotal}</small>
                   <strong>
-                    {formatPrice(getItemPrice({ ...selectedItem, combo: isCombo }))}
+                    {formatPrice(getItemPrice({ ...selectedItem, combo: isCombo }) * quantity)}
                   </strong>
                 </div>
                 <div className="item-modal-actions">
@@ -281,7 +313,7 @@ function MenuPage({ language, onAddToCart }) {
                   <button
                     className={`item-modal-add${recentlyAdded === selectedItem.id ? ' added' : ''}`}
                     type="button"
-                    onClick={() => addFromModal(selectedItem, isCombo)}
+                    onClick={() => addFromModal(selectedItem, isCombo, quantity)}
                   >
                     {recentlyAdded === selectedItem.id ? content.added : content.add}
                   </button>

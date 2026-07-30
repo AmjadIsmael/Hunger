@@ -408,6 +408,64 @@
   font-size: 1.15rem;
 }
 
+.item-modal-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.item-modal-quantity > span {
+  color: var(--cream);
+  font-size: 0.8rem;
+  font-weight: 750;
+}
+
+.item-quantity-control {
+  display: grid;
+  grid-template-columns: 38px 42px 38px;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #171611;
+}
+
+.item-quantity-control button {
+  height: 38px;
+  padding: 0;
+  border: 0;
+  color: var(--cream);
+  background: transparent;
+  font: inherit;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: color 140ms ease, background-color 140ms ease, transform 140ms ease;
+}
+
+.item-quantity-control button:disabled {
+  color: #55524a;
+  cursor: not-allowed;
+}
+
+.item-quantity-control span {
+  color: var(--cream);
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .item-quantity-control button:not(:disabled):hover {
+    color: #171205;
+    background-color: var(--gold);
+    transform: scale(1.06);
+  }
+}
+
 .item-modal-customize {
   margin-top: 22px;
   padding-top: 18px;
