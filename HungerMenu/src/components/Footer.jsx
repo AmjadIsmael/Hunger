@@ -1,5 +1,6 @@
 import logo from '../assets/HungerLogo.webp'
-import './Footer.css'
+import { WHATSAPP_NUMBER, WHATSAPP_PHONE_DISPLAY } from '../config'
+import '../styles/Footer.css'
 
 const copy = {
   en: {
@@ -10,7 +11,6 @@ const copy = {
     address: 'Al Ain, Baalbeck ',
     hours: 'Daily · 1:00 PM — 12:00 AM',
     contact: 'Contact',
-    phone: '+961 71 230 797',
     rights: 'All rights reserved.',
   },
   ar: {
@@ -21,7 +21,6 @@ const copy = {
     address: 'العين، بعلبك ',
     hours: 'يومياً · 1:00 ظهراً — 12:00 ليلاً',
     contact: 'تواصل معنا',
-    phone: '+961 71 230 797',
     rights: 'جميع الحقوق محفوظة.',
   },
 }
@@ -113,7 +112,7 @@ function Footer({ language, onNavigate }) {
 
         <div className="footer-column">
           <h3>{content.contact}</h3>
-          <a href="tel:+96171230797" dir="ltr">{content.phone}</a>
+          <a href={`tel:+${WHATSAPP_NUMBER}`} dir="ltr">{WHATSAPP_PHONE_DISPLAY}</a>
           <a href="https://instagram.com" target="_blank" rel="noreferrer">@hungers</a>
         </div>
       </div>

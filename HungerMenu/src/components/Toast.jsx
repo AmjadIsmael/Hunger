@@ -1,4 +1,5 @@
-import './Toast.css'
+import { CheckIcon, TrashIcon } from './Icons'
+import '../styles/Toast.css'
 
 const copy = {
   en: {
@@ -15,22 +16,6 @@ const copy = {
     cleared: 'تم إفراغ السلة',
     viewCart: 'عرض السلة',
   },
-}
-
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 12l5 5L20 6" />
-    </svg>
-  )
-}
-
-function TrashIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 7h16M9 3h6l1 4H8l1-4ZM6 7l1 14h10l1-14M10 11v6M14 11v6" />
-    </svg>
-  )
 }
 
 function Toast({ kind, item, leaving, language, onViewCart }) {

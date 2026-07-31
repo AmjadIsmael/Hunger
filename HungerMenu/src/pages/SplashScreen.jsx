@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import logo from '../assets/HungerLogo.webp'
-import './SplashScreen.css'
+import '../styles/SplashScreen.css'
 
 const SPLASH_DURATION = 2800
 

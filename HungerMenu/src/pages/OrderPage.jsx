@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
-import Footer from './Footer'
+import Footer from '../components/Footer'
 import { formatPrice } from '../utils/currency'
 import { COMBO_CATEGORIES, getCartKey, getItemPrice } from '../utils/cart'
-import './OrderPage.css'
+import { TrashIcon, WhatsAppIcon } from '../components/Icons'
+import { WHATSAPP_NUMBER } from '../config'
+import '../styles/OrderPage.css'
 
 const copy = {
   en: {
@@ -25,7 +27,7 @@ const copy = {
     pickup: 'Pickup',
     address: 'Address',
     addressPlaceholder: 'Street, building, apartment no.',
-    deliveryNote: 'Delivery Note (Optional)',
+    deliveryNote: ' Note (Optional)',
     notePlaceholder: 'Any extra instructions?',
     subtotal: 'Subtotal',
     delivery: 'Delivery',
@@ -64,7 +66,7 @@ const copy = {
     pickup: 'استلام من المطعم',
     address: 'العنوان',
     addressPlaceholder: 'الشارع، المبنى، رقم الشقة',
-    deliveryNote: 'ملاحظات التوصيل (اختياري)',
+    deliveryNote: 'ملاحظات (اختياري)',
     notePlaceholder: 'أي تعليمات إضافية؟',
     subtotal: 'المجموع الفرعي',
     delivery: 'التوصيل',
@@ -83,23 +85,6 @@ const copy = {
     clearCart: 'إفراغ السلة',
     clearCartConfirm: 'هل تريد إزالة كل العناصر من السلة؟',
   },
-}
-
-function TrashIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 7h16M9 3h6l1 4H8l1-4ZM6 7l1 14h10l1-14M10 11v6M14 11v6" />
-    </svg>
-  )
-}
-
-function WhatsAppIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.4-4.7A8.5 8.5 0 1 1 20.5 11.7Z" />
-      <path d="M8.3 7.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.5l.7 1.7c.1.3 0 .5-.2.7l-.6.7c-.2.2-.1.4 0 .6.7 1.2 1.6 2.1 2.9 2.7.2.1.4.1.6-.1l.8-1c.2-.2.4-.3.7-.2l1.7.8c.3.2.5.3.5.5 0 .2-.1 1.2-.7 1.8-.6.6-1.4.8-2.3.6-1-.2-2.4-.7-4-2.1-1.2-1.1-2.1-2.4-2.5-3.4-.4-1-.4-1.8-.1-2.5l.8-.9Z" />
-    </svg>
-  )
 }
 
 function OrderPage({
@@ -201,7 +186,7 @@ function OrderPage({
     ].join('\n')
 
     window.open(
-      `https://wa.me/96171230797?text=${encodeURIComponent(whatsappMessage)}`,
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`,
       '_blank',
       'noopener,noreferrer',
     )

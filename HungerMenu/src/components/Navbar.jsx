@@ -1,5 +1,6 @@
 import logo from '../assets/HungerLogo.webp'
-import './Navbar.css'
+import { CartIcon, HomeIcon, MenuIcon, TagIcon } from './Icons'
+import '../styles/Navbar.css'
 
 const navItems = [
   { key: 'Home', icon: 'home' },
@@ -12,19 +13,11 @@ const translations = {
   ar: { Home: 'الرئيسية', Menu: 'القائمة', Offers: 'العروض', Cart: 'السلة' },
 }
 
-function Icon({ name }) {
-  const paths = {
-    home: <><path d="m3 11 9-8 9 8" /><path d="M5 10v10h14V10M9 20v-6h6v6" /></>,
-    menu: <><path d="M4 6h16M4 12h16M4 18h10" /></>,
-    tag: <><path d="M20 13 12 21l-9-9V4h8l9 9Z" /><circle cx="8" cy="9" r="1.25" /></>,
-    cart: <><path d="M3 4h2l2.2 10.5a2 2 0 0 0 2 1.5H18a2 2 0 0 0 2-1.6L21 8H6" /><circle cx="10" cy="20" r="1" /><circle cx="18" cy="20" r="1" /></>,
-  }
+const icons = { home: HomeIcon, menu: MenuIcon, tag: TagIcon, cart: CartIcon }
 
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      {paths[name]}
-    </svg>
-  )
+function Icon({ name }) {
+  const IconComponent = icons[name]
+  return <IconComponent />
 }
 
 function Navbar({

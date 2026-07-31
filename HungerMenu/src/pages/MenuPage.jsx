@@ -1,13 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import menuItems from '../data/menuItems'
-import Footer from './Footer'
+import Footer from '../components/Footer'
 import { formatPrice } from '../utils/currency'
 import { COMBO_CATEGORIES, COMBO_EXTRA, getItemPrice } from '../utils/cart'
-import './MenuPage.css'
+import { CartIcon, CloseIcon } from '../components/Icons'
+import '../styles/MenuPage.css'
 
 const copy = {
   en: {
-       categories: {
+    eyebrow: 'Freshly made to order',
+    title: 'Our Menu',
+    intro: 'Big appetite deserves rich flavor. Discover your new favorite.',
+    categories: {
       all: 'All',
       'chicken-sandwiches': 'Chicken Sandwiches',
       'beef-sandwiches': 'Beef Sandwiches',
@@ -77,25 +81,7 @@ const categories = [
   'drinks',
 ]
 
-function CartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M3 4h2l2.2 10.5a2 2 0 0 0 2 1.5H18a2 2 0 0 0 2-1.6L21 8H6" />
-      <circle cx="10" cy="20" r="1" />
-      <circle cx="18" cy="20" r="1" />
-    </svg>
-  )
-}
-
-function CloseIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 5l14 14M19 5 5 19" />
-    </svg>
-  )
-}
-
-function MenuPage({ language, onAddToCart }) {
+function MenuPage({ language, onNavigate, onAddToCart }) {
   const [activeCategory, setActiveCategory] = useState('all')
   const [selectedItem, setSelectedItem] = useState(null)
   const [isCombo, setIsCombo] = useState(false)
@@ -324,7 +310,7 @@ function MenuPage({ language, onAddToCart }) {
         </div>
       )}
 
-      <Footer language={language} />
+      <Footer language={language} onNavigate={onNavigate} />
     </main>
   )
 }

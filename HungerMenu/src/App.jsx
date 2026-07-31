@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import Navbar from './components/Navbar'
-import HomePage from './components/HomePage'
-import MenuPage from './components/MenuPage'
-import OffersPage from './components/OffersPage'
-import OrderPage from './components/OrderPage'
-import SplashScreen from './components/SplashScreen'
 import Toast from './components/Toast'
+import HomePage from './pages/HomePage'
+import MenuPage from './pages/MenuPage'
+import OffersPage from './pages/OffersPage'
+import OrderPage from './pages/OrderPage'
+import SplashScreen from './pages/SplashScreen'
 import { getCartKey } from './utils/cart'
-import './App.css'
+import './styles/App.css'
 
 const TOAST_VISIBLE_MS = 2200
 const TOAST_EXIT_MS = 250

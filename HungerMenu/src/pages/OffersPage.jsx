@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import menuItems from '../data/menuItems'
 import { formatPrice } from '../utils/currency'
-import Footer from './Footer'
-import './MenuPage.css'
-import './OffersPage.css'
+import Footer from '../components/Footer'
+import { CartIcon, TagIcon } from '../components/Icons'
+import '../styles/MenuPage.css'
+import '../styles/OffersPage.css'
 
 const copy = {
   en: {
@@ -24,25 +25,6 @@ const copy = {
     emptyTitle: 'لا توجد عروض حالياً',
     emptyText: 'نحضّر لكم عروضاً مميزة. عودوا قريباً لاكتشاف أحدث العروض.',
   },
-}
-
-function CartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M3 4h2l2.2 10.5a2 2 0 0 0 2 1.5H18a2 2 0 0 0 2-1.6L21 8H6" />
-      <circle cx="10" cy="20" r="1" />
-      <circle cx="18" cy="20" r="1" />
-    </svg>
-  )
-}
-
-function OfferIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M20 13 12 21l-9-9V4h8l9 9Z" />
-      <circle cx="8" cy="9" r="1.25" />
-    </svg>
-  )
 }
 
 function OffersPage({ language, onAddToCart, onNavigate }) {
@@ -91,7 +73,7 @@ function OffersPage({ language, onAddToCart, onNavigate }) {
         </section>
       ) : (
         <section className="offers-empty">
-          <div className="offers-empty-icon"><OfferIcon /></div>
+          <div className="offers-empty-icon"><TagIcon /></div>
           <h2>{content.emptyTitle}</h2>
           <p>{content.emptyText}</p>
         </section>
